@@ -10,6 +10,8 @@ if (isset($_GET['submit'])) {
 if (isset($_POST['submit'])) {
     $name = $_POST['name'];
     echo "POST ile gelen ad: " . htmlspecialchars($name); // XSS qorunması üçün htmlspecialchars() istifadə edilir
+} else {
+    echo "Error";
 }
 
 ?>
