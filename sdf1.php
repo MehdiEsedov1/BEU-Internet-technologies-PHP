@@ -94,7 +94,53 @@
 
 //Question 9
 
+// $array1 = [0, 8, 9, 3, 4, 7, 1];
+// $array2 = [0, 1, 2, 6, 4, 7];
 
+// $array3 = [];
+// $array4 = [];
+
+// $resultArray = [];
+
+// if (count($array1) > count($array2)) {
+//     $array3 = $array1;
+//     $array4 = $array2;
+// } else {
+//     $array3 = $array2;
+//     $array4 = $array1;
+// }
+
+// for ($i = 0; $i < count($array3); $i++) {
+//     $found = false;
+
+//     for ($n = 0; $n < count($array4); $n++) {
+//         if ($array3[$i] == $array4[$n]) {
+//             $found = true;
+//             break;
+//         }
+//     }
+
+//     if ($found != true) {
+//         array_push($resultArray, $array3[$i]);
+//     }
+// }
+
+// for ($i = 0; $i < count($array4); $i++) {
+//     $found = false;
+
+//     for ($n = 0; $n < count($array3); $n++) {
+//         if ($array4[$i] == $array3[$n]) {
+//             $found = true;
+//             break;
+//         }
+//     }
+
+//     if ($found != true) {
+//         array_push($resultArray, $array4[$i]);
+//     }
+// }
+
+// print_r($resultArray);
 
 // echo "number : " . $number . "<br>" . "count : " . $count;
 
