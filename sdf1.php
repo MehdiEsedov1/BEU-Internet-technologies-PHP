@@ -44,6 +44,18 @@
 
 // echo "sum of elements of array : " . $sum . "<br>" . "count of elements : " . count($array);
 
+//Question 5
+
+// function splitArray($string, $length)
+// {
+//     return str_split($string, $length);
+// }
+
+// $string = "HelloWorldThisIsPHP";
+// $result = splitArray($string, 5);
+
+// print_r($result);
+
 //Question 6
 
 // $array = [0, 1, 2, 3, 4, 5];
@@ -91,6 +103,8 @@
 //         $count++;
 //     }
 // }
+
+// echo "number : " . $number . "<br>" . "count : " . $count;
 
 //Question 9
 
@@ -141,8 +155,6 @@
 // }
 
 // print_r($resultArray);
-
-// echo "number : " . $number . "<br>" . "count : " . $count;
 
 //Question 10
 
