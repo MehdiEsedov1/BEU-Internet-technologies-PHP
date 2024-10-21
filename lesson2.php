@@ -84,30 +84,30 @@ echo "Task tamamlandi." . "<br>";
 
 date_default_timezone_set("Asia/Baku"); # php kodlarinin hansi saat qursagina gore islemesini bildirmek ucun;
 
-$gun = date("d");
-$ay = date("m");
-$il = date("Y");
-$saat = date("H");
-$deqiqe = date("i");
-$saniye = date("s");
+$day = date("d");
+$mounth = date("m");
+$year = date("Y");
+$hour = date("H");
+$minute = date("i");
+$second = date("s");
 $dayOfMonth = date("l");
-$month = date("F");
+$nameOfMounth = date("F");
 
-echo $saat;
+echo $hour;
 echo "<br>";
-echo $gun;
+echo $day;
 echo "<br>";
-echo $il;
+echo $year;
 echo "<br>";
-echo $ay;
+echo $mounth;
 echo "<br>";
-echo $deqiqe;
+echo $minute;
 echo "<br>";
-echo $saniye;
+echo $second;
 echo "<br>";
-echo $dayOfMonth;
+echo $dayOfMounth;
 echo "<br>";
-echo $month;
+echo $nameOfMounth;
 
 echo date("Y-m-d", 1232412343); # date-de istediyimiz zamani saniye ile tapmaq
 
@@ -124,7 +124,7 @@ echo date("Y-m-d", $add);
 # strtotime daha oxunaqli tarixi Unix timestamp-a cevirmek ucundur;
 
 $d = strtotime("11:20pm April 18 2019");
-echo "Created date is " . date("Y-m-d h:i:sa", $d);
+echo date("Y-m-d h:i:sa", $d);
 
 # -------------------------------------------
 
@@ -151,6 +151,3 @@ echo "<br>";
 var_dump(checkdate(2, 29, 2004));
 
 # -----------------------------------------
-
-// require qoyanda eger path ve ya adi sehv olarsa, ondan asagidaki kodlar islemir, include-de ise isleyir.
-// Bunlarin once (include_once, require_once) funksiyalarinda ise o ise yarayir ki, eger bu funksiyalari bir nece defe cagirsaq, yalniz bir defe ekrana verecekdir.
