@@ -23,13 +23,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     // SQL sorğusunu yazın
-    $sql = "INSERT INTO users (username, password) VALUES ('$username', '$hashed_password')";
+    $myQuery = "INSERT INTO users (username, password) VALUES ('$username', '$hashed_password')";
 
     // Sorğunu icra edin və yoxlayın
-    if ($conn->query($sql) === true) {
+    if ($conn->query($myQuery) === true) {
         echo "Məlumat uğurla əlavə olundu!";
     } else {
-        echo "Xəta: " . $sql . "<br>" . $conn->error;
+        echo "Xəta: " . $myQuery . "<br>" . $conn->error;
     }
 }
 
