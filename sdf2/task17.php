@@ -8,40 +8,33 @@
 <body>
     <h1>Sətiri Sil</h1>
     <?php
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $database = "sdf2";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "sdf2";
 
-        $conn = new mysqli($servername, $username, $password, $database);
+$conn = new mysqli($servername, $username, $password, $database);
 
-        if ($conn->connect_error) {
-            die("Bağlantı uğursuz oldu: " . $conn->connect_error);
-        }
+if ($conn->connect_error) {
+    die("Bağlantı uğursuz oldu: " . $conn->connect_error);
+}
 
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $id = intval($_POST["id"]);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $id = intval($_POST["id"]);
 
-            $sql = "DELETE FROM user WHERE id = ?";
-            $stmt = $conn->prepare($sql);
+    $myQuery = "DELETE FROM user WHERE id = $id";
 
-            if (!$stmt) {
-                die("SQL sorğusu hazırlana bilmədi: " . $conn->error);
-            }
+    if ($conn->query($myQuery) === true) {
+        echo "<p style='color: green;'>Sətir uğurla silindi!</p>";
+    } else {
+        echo "<p style='color: red;'>Xəta baş verdi: " . $conn->error . "</p>";
+    }
+}
 
-            $stmt->bind_param("i", $id);
+$conn->close();
 
-            if ($stmt->execute()) {
-                echo "<p style='color: green;'>Sətir uğurla silindi!</p>";
-            } else {
-                echo "<p style='color: red;'>Xəta baş verdi: " . $stmt->error . "</p>";
-            }
-
-            $stmt->close();
-        }
-
-        $conn->close();
-    ?>
+$conn->close();
+?>
 
     <form action="" method="POST">
         <label for="id">Silinəcək ID:</label>

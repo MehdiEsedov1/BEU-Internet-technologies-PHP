@@ -8,7 +8,7 @@
 <body>
     <h1>Verilənləri Yenilə</h1>
     <?php
-// Verilənlər bazası bağlantısı
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -16,39 +16,27 @@ $database = "sdf2";
 
 $conn = new mysqli($servername, $username, $password, $database);
 
-// Bağlantını yoxla
 if ($conn->connect_error) {
     die("Bağlantı uğursuz oldu: " . $conn->connect_error);
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id = intval($_POST["id"]); // ID-ni tam ədədə çevir
+
+    $id = intval($_POST["id"]);
+
     $name = $_POST["name"];
     $surname = $_POST["surname"];
 
-    // SQL sorğusu
-    $sql = "UPDATE user SET name = ?, surname = ? WHERE id = ?";
-    $stmt = $conn->prepare($sql);
+    $sql = "UPDATE user SET name = '$name', surname = '$surname' WHERE id = $id";
 
-    // Sorğunun düzgün hazırlanıb-hazırlanmadığını yoxla
-    if (!$stmt) {
-        die("SQL sorğusu hazırlana bilmədi: " . $conn->error);
-    }
-
-    // Parametrləri əlavə et
-    $stmt->bind_param("ssi", $name, $surname, $id);
-
-    // Sorğunu icra et
-    if ($stmt->execute()) {
+    if ($conn->query($sql) === true) {
         echo "<p style='color: green;'>Məlumatlar uğurla yeniləndi!</p>";
     } else {
-        echo "<p style='color: red;'>Xəta baş verdi: " . $stmt->error . "</p>";
+        echo "<p style='color: red;'>Xəta baş verdi: " . $conn->error . "</p>";
     }
-
-    $stmt->close(); // Sorğunu bağla
 }
 
-$conn->close(); // Bağlantını bağla
+$conn->close();
 ?>
 
     <form action="" method="POST">
