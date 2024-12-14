@@ -19,15 +19,15 @@ if (isset($_POST['submit'])) {
 <body>
     <form method="post" action="">
         <div>
-            <input name="options[]" type="checkbox" value="option1">
+            <input type="checkbox" name="options[]" value="option1">
             <label>1</label>
         </div>
         <div>
-            <input name="options[]" type="checkbox" value="option2">
+            <input type="checkbox" name="options[]" value="option2">
             <label>2</label>
         </div>
         <div>
-            <input name="options[]" type="checkbox" value="option3">
+            <input type="checkbox" name="options[]" value="option3">
             <label>3</label>
         </div>
         <input type="submit" name="submit" value="submit">

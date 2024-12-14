@@ -10,12 +10,11 @@ if (isset($_POST['submit'])) {
 ?>
 
 <form action="" method="POST">
-    <select name="car" id="">
+    <select name="car">
         <option value="BMW">BMW</option>
         <option value="Mercedes">MERCEDES</option>
         <option value="Ferrari">FERRARI</option>
     </select>
-    <br>
-    <textarea name="text" id="" cols="30" rows="10"></textarea>
+    <textarea name="text" cols="30" rows="10"></textarea>
     <input type="submit" name="submit" value="send">
 </form>

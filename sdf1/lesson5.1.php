@@ -3,6 +3,8 @@
 if (isset($_GET['submit'])) {
     $name = $_GET['name'];
     echo "GET ile gelen ad: " . htmlspecialchars($name);
+} else {
+    echo "Error";
 }
 
 if (isset($_POST['submit'])) {

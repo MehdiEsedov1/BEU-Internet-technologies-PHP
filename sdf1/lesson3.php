@@ -4,11 +4,11 @@ $builtInFunctions = $functions['internal'];
 
 // Movcud PHP versiyasindaki built-in funksiyalarinin sayi
 echo "<br>";
-// print_r($builtInFunctions);
+print_r($builtInFunctions);
 
 // hem built-in, hem de user-defined funksiyalar
 echo "<br>";
-// print_r($functions);
+print_r($functions);
 
 # ------------------------------------------------------------------------------------------------------------------
 
@@ -25,81 +25,45 @@ function correctName()
     echo true;
 }
 
-# ------------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------
+// Funksiyada default (sabit) dəyərlərin istifadə olunması
 
-# Funksiyanin teyin edilmesi
-
-# Void functionlar - return qaytarmayan funksiyalardir
-
-function test()
-{
-    echo "Bu bir void functiondur";
-}
-
-test();
-
-# ------------------------------------------------------
-
-# return deyer qaytaran funksiyalar
-
-function sum($a, $b)
-{
-    return $a + $b;
-}
-
-$toplama = sum(4, 5);
-
-echo $toplama;
-
-# ------------------------------------------------------
-
-# funksiyada deyerin static olaraq verilmesi;
-
+// Funksiya default olaraq $a=4 və $b=2 dəyərləri ilə çağırılır
 function sumTest($a = 4, $b = 2)
 {
+    // İki ədədin qüvvətini hesablayır və ekrana çap edir
     echo $a ** $b;
 }
 
-sumTest();
+// Default dəyərlərlə çağırılır: $a=4, $b=2
+sumTest(); // Çıxış: 16 (4^2)
 
+// Başqa bir funksiya: sumTest1
 function sumTest1($a = 4, $b = 2)
 {
+    // İki ədədin qüvvətini hesablayır və ekrana çap edir
     echo $a ** $b;
 }
 
-sumTest1(2, 3);
+// Parametrlər ötürülür: $a=2, $b=3
+sumTest1(2, 3); // Çıxış: 8 (2^3)
+// ---------------------------------------------------
 
-# ------------------------------------------------------
+// Funksiyaların dəyişənlər vasitəsilə çağırılması
 
-# functionla if else istifadesi
-
-function control($yas)
-{
-    if ($yas > 18) {
-        echo "icaze verildi";
-    } elseif ($yas == 17) {
-        echo "1 il sonra icaze verilecek";
-    } else {
-        echo "icaze yoxdur";
-    }
-}
-
-echo control(19);
-
-# ---------------------------------------------------
-
-# functionlarin ferqli cagirilmasi
-
+// Sadə bir funksiya: test1
 function test1()
 {
+    // "test" yazısını ekrana çap edir
     echo "test";
 }
 
-$deyer = "test";
+// Funksiya adını saxlayan dəyişən
+$deyer = "test1"; // Dəyişən "test1" funksiyasını işarə edir
 
-echo $deyer();
-
-# --------------------------------------------------
+// Dəyişən vasitəsilə funksiya çağırılır
+$deyer(); // Çıxış: test
+// --------------------------------------------------
 
 # func_num_args - funksiyaya daxil edilen parametr sayi, func_get_arg - funksiyada olan parametrler;
 
@@ -138,7 +102,7 @@ if (function_exists("test")) {
 
 # ----------------------------------------------------
 
-#get_defined_functions(); - user-defined funksiyalar brauzerde en asagida gorunur;
+# get_defined_functions(); - user-defined funksiyalar brauzerde en asagida gorunur
 
 function topla($a, $b)
 {
@@ -152,7 +116,7 @@ function vur($a, $b)
 
 $definedFunctions = get_defined_functions();
 
-// print_r($definedFunctions);
+print_r($definedFunctions);
 
 # -----------------------------------------------------
 
@@ -179,14 +143,8 @@ echo faktorial(5);
 function test6()
 {
     $deyer = 13;
+    echo $deyer;
 }
-
-test6();
-
-# funksiya daxilinde teyin etdik deye, funksiya xaricinde netice cixarmir, xeta verir
-echo $deyer;
-
-# -------------------------------------------------------------
 
 #global
 
@@ -198,25 +156,11 @@ function test7()
     $deyer += 2;
 }
 
-test7();
-
-echo $deyer;
-
-# ------------------------------------------
-
-$deyer = 13;
-
 function test8()
 {
-#yanlis
-//global $deyer += 2;
+# yanlis
+// global $deyer += 2;
 }
-
-test8();
-
-echo $deyer;
-
-// -------------------------------
 
 # static
 
@@ -237,50 +181,7 @@ staticVariable();
 
 # -------------------------------------------------------
 
-# bir funksiyadan digerine deyer oturme
-
-# Metod 1:
-
-function sendingValue()
-{
-    $deyer = 50;
-    gettingValue($deyer);
-}
-
-function gettingValue($deyer)
-{
-    echo "gettingValue() funksiyasi ucun deyer:" . $deyer;
-}
-
-sendingValue();
-
-# ----------------------------------------
-
-# Metod 2:
-
-//global variable yaradib her ikisinde istifade etmekle
-
-$deyer = 50;
-
-function sendingValue1()
-{
-    global $deyer;
-    echo "sendingValue() funksiyasi ucun deyer " . $deyer;
-}
-
-function gettingValue1()
-{
-    global $deyer;
-    echo "gettingValue() funksiyasi ucun deyer " . $deyer;
-}
-
-sendingValue1();
-echo "<br>";
-gettingValue1();
-
-# -------------------------------------
-
-# call by value and call by reference;
+# call by value and call by reference
 
 # call by value
 
@@ -324,8 +225,8 @@ function addNumbers(int $a, int $b)
 // parametrlere sert olaraq "int" versek de, netice 10 verecek
 
 echo addNumbers(5, "5 days");
-# .php filesinde ne bas hisseye yazilmalidir, bu zaman integer deyerli parametrle string deyerli parametri toplayan zaman xeta verecek
 
+# .php faylında en bas hisseye yazilmalidir, bu zaman integer deyerli parametrlə string deyerli parametri toplayan zaman error verecek
 // declare(strict_types=1); //strict modu aktiv edir
 
 function addNumbers1(int $a, int $b)
@@ -333,6 +234,6 @@ function addNumbers1(int $a, int $b)
     return $a + $b;
 }
 
-// echo addNumbers1(5, "5 days");
+echo addNumbers1(5, "5 days");
 
 # ----------------------------------------------------------------

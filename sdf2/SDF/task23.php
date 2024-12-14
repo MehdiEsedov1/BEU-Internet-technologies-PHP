@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $database = "sdf2";
 
     $conn = new mysqli($servername, $username, $password, $database);
-    
+
     if ($conn->connect_error) {
         die("Bağlantı uğursuz oldu: " . $conn->connect_error);
     }
@@ -33,22 +33,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $old_password = $_POST['old_password'];
     $new_password = $_POST['new_password'];
 
-    // Veritabanından istifadəçi məlumatlarını əldə et
-    $sql = "SELECT password FROM user WHERE id = 1"; // Məsələn, id = 1 olan istifadəçi
-    $result = $conn->query($sql);
+    $myQuery = "SELECT password FROM user WHERE id = 1";
+    $result = $conn->query($myQuery);
     $row = $result->fetch_assoc();
 
-    // Əvvəlki şifrəni yoxla
     if (password_verify($old_password, $row['password'])) {
-        // Yeni şifrəni şifrələyin
         $new_password_hash = password_hash($new_password, PASSWORD_DEFAULT);
 
-        // Şifrəni yenilə
-        $update_sql = "UPDATE user SET password = ? WHERE id = 1";
-        $stmt = $conn->prepare($update_sql);
-        $stmt->bind_param("s", $new_password_hash);
-        $stmt->execute();
-        echo "Şifrə uğurla dəyişdirildi!";
+        $myQuery = "UPDATE user SET password = '$new_password_hash' WHERE id = 1";
+
+        if ($conn->query($myQuery) === true) {
+            echo "Şifrə uğurla dəyişdirildi!";
+        } else {
+            echo "Şifrəni dəyişdirərkən xəta baş verdi: " . $conn->error;
+        }
     } else {
         echo "Əvvəlki şifrə səhvdir!";
     }

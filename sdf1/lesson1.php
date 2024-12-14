@@ -1,18 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<!-- php kodları html kodları ilə yazılarsa php bitiş simvolunu yazmaq mmütləqdir. Əks halda yazıla da bilər, yazılmaya da -->
 
 <?php
+# comments
+
+//Single line comments
+# Single line comments
+
+/*
+Multi line comments
+ */
+
 # ----------------------------------------------------------------
 
 # variables
 
-$variable = 'variable';
+#Dəyişən yaradan zaman $ istifadə olunmalıdır
+$variable = 'x';
 
 # -----------------------------------------------------------------
 
@@ -20,66 +23,62 @@ $variable = 'variable';
 
 // local
 
-function test1()
+function test()
 {
-    $variable1 = 'local'; # local scope;
+    $variable1 = 'local';
+    echo $variable1;
 }
 
-# local olduğu üçün error verəcək, yalnız function daxilində istifadə oluna bilər;
-
+# local olduğu üçün error verəcək, yalnız function daxilində istifadə oluna bilər
 // echo $variable1;
 
 // global;
 
 $variable2 = 'global';
 
-function test2()
+function test0()
 {
-    # error verəcək, global keyword-u istifadə olunmalıdır;
+    // `global` açar sözü istifadə edilir
     global $variable2;
-
-    echo $variable2 . "\n";
+    echo $variable2;
 }
 
 // static;
 
 // function daxilində yaradılmış dəyişənin dəyişiklikdən sonra dəyərini qorumaq üçün static keyword-u istifadə olunmalıdır
 
-function test3()
+function test1()
 {
     static $variable3 = 0;
-    echo $variable3 . "\n";
+    echo $variable3;
     $variable3++;
 }
 
-#static keyword-u istifadə etməsək, cavablar funksiya hər çağırıldığında 0 olacaq;
-
-test3();
-test3();
-
 # ------------------------------------------------------------
 
-# echo print və fərqləri;
-// echo sürət performans cəhətdən print-dən daha sürətlidir. echo daha çox dəyəri (dəyişəni) eyni anda istifadə edə bilir, print yox
+# echo, print və fərqləri
 
-echo 'salam' . "\n";
-# html-in bütün teqləri php tərəfindən tanınır və istifadə olunur.
-echo "</br>" . "\n";
-echo 'dünya' . "\n";
+// echo sürət performans cəhətdən print-dən daha sürətlidir
+// echo daha çox dəyəri (dəyişəni) eyni anda istifadə edə bilir, print yox
+echo 'Hello';
 
-$variable = 'salam';
+# html-in bütün teqləri php tərəfindən tanınır və istifadə olunur
+echo "</br>";
+
+$variable = 'Hello';
 $variable2 = array(2, 3, 4, 5, 5, 6, 6);
 
-#echo ilə output;
-echo $variable . "\n";
-#print ilə output;
-print($variable . "\n");
-# print_r arrayları output etmək üçün istifadə olunur
-print_r($variable2 . "\n");
+# echo ilə output
+echo $variable;
 
-$variable = 'salam';
+# print ilə output
+print($variable);
+
+# print_r arrayları output etmək üçün istifadə olunur
+print_r($variable2);
+
 # php case-sensitive dildir
-echo $VARİABLE . "\n";
+echo $VARIABLE;
 
 // echo "salam", "necesen"; - istifadə oluna bilər
 // print "salam", "necesen"; - istifadə oluna bilməz
@@ -88,71 +87,64 @@ echo $VARİABLE . "\n";
 
 # define, const
 // define number və stringlər üçündür (PHP 7-dən arraylar üçün də istifadə oluna bilər)
-// const sabitləri yalnız siniflərin və ya global scope-un içində təyin edilə bilər, if, else, for, while ,do while daxilində isə yox
+// const sabitləri yalnız siniflərin və ya global scope-un içində təyin edilə bilər, if else, for, while daxilində isə yox
 
 const PI = 3.14;
-
 echo PI;
 
-if (true) {
-    // Bu, xətaya səbəb olacaq. const blok səviyyəsində işləyə bilməz.
-    // const text = "Hello";
-}
+// if (true) {
+// Bu, xətaya səbəb olacaq. const blok səviyyəsində işləyə bilməz
+// const INSIDE_IF = "Hello";
+// }
 
 // define isə hər yerdə yaradıla bilər, globaldır hər yerdə əlçatandır
-
-#sabit deyişən yaratmaq üçün (true - case sensitive olmadığını bildirir)
-
+# sabit deyişən yaratmaq üçün (true - case-insensitive bildirir);
 define('variable', 2, true);
 
 # dəyişənin tipini və valuesini göstərir (stringlərdə uzunluğunu da);
-
 echo var_dump(variable);
 
 # ------------------------------------------------------------
 
 # string metodları;
 
-$text = "Salam dunya, necesen?";
+$deyisen = "Hello, World!!!";
 
-echo strlen($text); #stringin uzunlugunu ekrana cixaran string methodu;
-echo str_word_count($text); #stringde olan sozlerin uzunlugunu ekrana cixaran string methodu;
-echo strrev($text); #stringi tersden yazan string methodu;
-echo strpos($text, 'n'); #qeyd etdiyimiz sozu ve ya herfi tapmaq ucun istifade olunan kod setri;
-echo str_replace('necesen', 'ne var ne yox', $text);
+# stringin uzunlugunu ekrana cixaran string methodu
+echo strlen($deyisen);
+
+# stringde olan sozlerin uzunlugunu ekrana cixaran string methodu
+echo str_word_count($deyisen);
+
+# stringi tersden yazan string methodu
+echo strrev($deyisen);
+
+# qeyd etdiyimiz sozu ve ya herfi tapmaq ucun istifade olunan kod setri
+echo strpos($deyisen, 'n');
+
+# Dəyişəndə necesen sözünü ne var ne yox ilə əvəz edəcək
+echo str_replace('necesen', 'ne var ne yox', $deyisen);
 
 # ------------------------------------------------------------
 
 # Data types
 
-#integer;
-$deyisen = 1;
+$deyisen = 0 / 0;
 
-#float;
-$deyisen = 1.0;
-
-// $deyisen = 0 / 0;
-
-// if (is_nan(0 / 0)) { // NAN olub olmadığını yoxlamaq üçündür
-//     echo "NAN";
-// } else {
-//     echo "DEYIL";
-// }
+// NAN olub olmadığını yoxlamaq üçündür
+if (is_nan(0 / 0)) {
+    echo "NAN";
+} else {
+    echo "DEYIL";
+}
 
 $deyer = null;
 
-if (is_null($deyer)) { // NULL olub olmadığını yoxlamaq üçündür
+// NULL olub olmadığını yoxlamaq üçündür
+if (is_null($deyer)) {
     echo "NULL-dur";
 } else {
     echo "NULL deyil";
-}
-
-$available = true;
-
-if ($available) {
-    echo "true";
-} else {
-    echo "false";
 }
 
 # ---------------------------------------------------------
@@ -160,12 +152,11 @@ if ($available) {
 $x = 100;
 $y = "100";
 
-var_dump($x === $y); // false qaytarir cunki value beraberdir amma type yox;
-var_dump($x == $y); // true
+// false qaytarir cunki value beraberdir amma type yox
+var_dump($x === $y);
 
-//arithmetic operatorlar +, -, *, /, %, **;
-//assignment operators =, +=, -=, *=, /=, %=;
-//increment, decrement $x-- x-i çap edir, sonra azaldir, --$x x-i azaldir sonra çap edir;
+// true
+var_dump($x == $y);
 
 # String concatination operator
 
@@ -175,16 +166,13 @@ echo $a . ' ' . $b;
 
 # ----------------------------------------------------
 
-//tek dirnaq ve cut dirnaq arasindaki ferqler
+// tek dirnaq ve cut dirnaq arasindaki ferqler
 
 $ad = "name";
 $soyad = "surname";
 
-#cut dirnaq icinde deyisenlerin valueleri oxunur, tek dırnaqda isə yalnız dəyişənin adı
-
+# Cüt dırnaq icinde deyisenlerin valueleri oxunur, tek dırnaqda isə yalnız dəyişənin adı
 echo "My name is $ad";
 echo 'My name is $ad';
-?>
 
-</body>
-</html>
+?>
