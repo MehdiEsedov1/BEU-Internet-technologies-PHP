@@ -1,64 +1,50 @@
 <?php
-// PHP kodu şəkil yükləməsi və təhlükəsizlik yoxlamaları üçün
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Şəkil yüklənərkən istifadə ediləcək qovluq
-    $target_dir = "uploads/"; // Şəkillərin saxlanılacağı qovluq
-    $target_file = $target_dir . basename($_FILES["image"]["name"]); // Faylın tam yolu
-    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION)); // Faylın tipi (uzantısı)
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $pp = $_FILES['pp'];
 
-    // Şəkil faylının düzgün olub-olmamasını yoxlayaq
-    if (isset($_POST["submit"])) {
-        $check = getimagesize($_FILES["image"]["tmp_name"]);
-        if ($check !== false) {
-            echo "Fayl bir şəkil faylıdır - " . $check["mime"] . ".<br>";
-        } else {
-            echo "Fayl bir şəkil deyil.<br>";
-            exit();
+    // İcazə verilən fayl formatları və maksimum ölçü
+    $allowedFileType = ["image/jpeg", "image/jpg", "image/png"]; // İcazə verilən fayl formatları
+    $allowedFileSize = 2 * 1024 * 1024; // Maksimum 2 MB ölçü
+
+    if ($pp['error'] == UPLOAD_ERR_OK) { // Fayl uğurla yüklənibsə
+        // Faylın formatını yoxlayırıq
+        if (!in_array($pp['type'], $allowedFileType)) {
+            die("Fayl növü düzgün deyil!");
         }
-    }
+        // Faylın ölçüsünü yoxlayırıq
+        else if ($allowedFileSize < $pp['size']) {
+            die("Fayl ölçüsü 2 MB-dan böyükdür!");
+        }
 
-    // Faylın ölçüsünün 5MB-dan böyük olmaması
-    if ($_FILES["image"]["size"] > 5000000) { // 5MB
-        echo "Üzr istəyirik, fayl çox böyükdür.<br>";
-        exit();
-    }
+        // Yükləmə qovluğu və fayl adının yaradılması
+        $dir = "uploads/"; // Faylın yüklənəcəyi qovluq
+        $file = uniqid() . "-" . basename($pp['name']); // Unikal ad yaradılır
+        $upload_where = $dir . $file; // Tam yol yaradılır
 
-    // Yalnız şəkil formatlarına icazə verilir
-    if ($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" && $imageFileType != "gif") {
-        echo "Üzr istəyirik, yalnız JPG, JPEG, PNG və GIF fayllarına icazə verilir.<br>";
-        exit();
-    }
+        // Əgər qovluq yoxdursa, yaradılır
+        if (!is_dir($dir)) {
+            mkdir($dir);
+        }
 
-    // Faylın artıq mövcud olub-olmaması yoxlanır
-    if (file_exists($target_file)) {
-        echo "Fayl artıq mövcuddur.<br>";
-        exit();
-    }
-
-    // Faylın yüklənməsi
-    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-        echo "Fayl " . htmlspecialchars(basename($_FILES["image"]["name"])) . " uğurla yükləndi.<br>";
+        // Faylın yüklənməsi
+        move_uploaded_file($pp['tmp_name'], $upload_where);
     } else {
-        echo "Üzr istəyirik, fayl yüklənərkən bir xəta baş verdi.<br>";
+        die("<div class='alert alert-danger'>Fayl yüklənmədi!</div>");
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="az">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Şəkil Yükləmə</title>
 </head>
 <body>
-    <h2>Şəkil Yükləmək</h2>
-    <!-- HTML formu şəkil yükləmək üçün -->
-    <form action="" method="POST" enctype="multipart/form-data">
-        <label for="image">Şəkil Seçin:</label>
-        <input type="file" name="image" id="image" accept="image/*" required>
-        <br><br>
-        <input type="submit" name="submit" value="Şəkil Yüklə">
+    <form method="POST" enctype="multipart/form-data">
+        <input accept="image/*" type="file" id="pp" name="pp" required>
+        <input type="submit" value="submit">
     </form>
 </body>
 </html>

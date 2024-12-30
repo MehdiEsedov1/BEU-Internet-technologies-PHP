@@ -25,33 +25,69 @@ var_dump($a > $b && $a < 20); // true (və operatoru)
 var_dump($a > $b || $a < 3); // true (və ya operatoru)
 var_dump(!$a == $b); // true (not operatoru)
 
-// 4. Bitwise Operatorlar
-echo "<br>Bitwise Operatorlar:<br>";
-echo "AND: " . ($a & $b) . "<br>"; // 10 & 5 = 0
-echo "OR: " . ($a | $b) . "<br>"; // 10 | 5 = 15
-echo "XOR: " . ($a ^ $b) . "<br>"; // 10 ^ 5 = 15
-
 // 5. Təyin Etmə Operatorları
 echo "<br>Təyin Etmə Operatorları:<br>";
 $a += 5; // $a = $a + 5
 echo "Yeni $a: " . $a . "<br>"; // 15
+echo "<br>";
 
-// 6. PHP date() funksiyası
+// php kodlarinin hansi saat qursagina gore islemesini bildirmek ucun
 
-// Cari tarix formatı: "Y-m-d"
-echo "<br>PHP date() funksiyası:<br>";
-echo "Cari tarix (Y-m-d formatı): " . date("Y-m-d") . "<br>"; // 2024-12-29
+date_default_timezone_set("Asia/Baku");
 
-// Cari vaxt formatı: "H:i:s"
-echo "Cari vaxt (H:i:s formatı): " . date("H:i:s") . "<br>"; // 15:23:50
+$gun = date("d");
+$ay = date("m");
+$il = date("Y");
+$saat = date("H");
+$deqiqe = date("i");
+$saniye = date("s");
+$day_of_week = date("l");
+$month = date("F");
 
-// Şu anki tarix və saat formatı: "d/m/Y H:i:s"
-echo "Tarix və saat (d/m/Y H:i:s formatı): " . date("d/m/Y H:i:s") . "<br>"; // 29/12/2024 15:23:50
+echo $saat;
+echo "<br>";
+echo $gun;
+echo "<br>";
+echo $il;
+echo "<br>";
+echo $ay;
+echo "<br>";
+echo $deqiqe;
+echo "<br>";
+echo $saniye;
+echo "<br>";
+echo $day_of_week;
+echo "<br>";
+echo $month;
+echo "<br>";
 
-// Unix zaman damgası ilə tarix göstərmək
-$timestamp = 1609459200; // 01-01-2021 00:00:00
-echo "Unix timestamp ilə tarix: " . date("d-m-Y H:i:s", $timestamp) . "<br>"; // 01-01-2021 00:00:00
+// date-de istediyimiz zamani saniye ile tapmaq
+echo date("Y-m-d", 1232412343);
+echo "<br>";
 
-// strtotime() funksiyası ilə tarix manipulyasiyası
-$timestamp_from_string = strtotime("2024-12-29");
-echo "strtotime() ilə tarix: " . date("d-m-Y", $timestamp_from_string) . "<br>"; // 29-12-2024
+// bir saat onceki zaman
+echo date("H:i:s", time() - 60 * 60);
+echo "<br>";
+
+// mktime() ile de zaman yaratmaq olar
+$add = mktime(12, 20, 40, 10, 21, 1995);
+echo date("Y-m-d", $add);
+echo "<br>";
+
+// strtotime daha oxunaqli tarixi Unix timestamp-a cevirmek ucundur;
+$d = strtotime("11:20pm April 18 2019");
+echo "Created date is " . date("Y-m-d h:i:sa", $d);
+echo "<br>";
+
+// getdate()
+$date = getdate();
+print_r($date);
+echo "$date[year], $date[month]";
+echo "<br>";
+
+// checkdate() hemin tarixin olub olmadigini yoxlayir;
+var_dump(checkdate(2, 29, 2003));
+echo "<br>";
+
+var_dump(checkdate(2, 29, 2004));
+echo "<br>";
