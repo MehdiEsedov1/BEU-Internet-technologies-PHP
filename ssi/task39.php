@@ -21,7 +21,6 @@ echo "<tr><th>ID</th><th>Name</th><th>Surname</th></tr>";
 
 while ($row = $result->fetch_assoc()) {
     echo "<tr>";
-    echo "<td>" . $row['id'] . "</td>";
     echo "<td>" . $row['name'] . "</td>";
     echo "<td>" . $row['surname'] . "</td>";
     echo "</tr>";

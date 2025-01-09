@@ -17,7 +17,6 @@ try {
 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         echo "<tr>";
-        echo "<td>" . $row['id'] . "</td>";
         echo "<td>" . $row['name'] . "</td>";
         echo "<td>" . $row['surname'] . "</td>";
         echo "</tr>";
