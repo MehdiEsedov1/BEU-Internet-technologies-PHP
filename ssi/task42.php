@@ -9,15 +9,16 @@ try {
 
     $query = "UPDATE usersinfo SET name = ?, surname = ? WHERE id = ?";
 
-    $stmt = $pdo->prepare($query);
-
     $name = "Adrian";
     $surname = "Harris";
     $id = 2;
 
-    $stmt->execute([$name, $surname, $id]);
+    $stmt = $pdo->prepare($query);
+    $stmt->bindValue(1, $name, PDO::PARAM_STR);
+    $stmt->bindValue(2, $surname, PDO::PARAM_STR);
+    $stmt->bindValue(3, $id, PDO::PARAM_INT);
 
-    if ($stmt->rowCount() > 0) {
+    if ($stmt->execute()) {
         echo "data update oldu";
     } else {
         echo "data update olmadı";

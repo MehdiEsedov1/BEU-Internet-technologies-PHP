@@ -7,13 +7,13 @@ try {
     $pdo = new PDO($dsn, $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $query = "DELETE FROM usersinfo WHERE id = ?";
     $id = 2;
+    $query = "DELETE FROM usersinfo WHERE id = ?";
 
     $stmt = $pdo->prepare($query);
-    $stmt->execute([$id]);
+    $stmt->bindValue(1, $id, PDO::PARAM_INT);
 
-    if ($stmt->rowCount() > 0) {
+    if ($stmt->execute()) {
         echo "Data silindi.";
     } else {
         echo "Data silinmədi.";

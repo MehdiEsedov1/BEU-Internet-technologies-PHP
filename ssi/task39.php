@@ -4,31 +4,30 @@ $password = "";
 $servername = "localhost";
 $dbname = "users";
 
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+if ($conn->connect_error) {
+    die($conn->connect_error);
 }
 
 $query = "SELECT id, name, surname FROM usersinfo";
 
-$stmt = mysqli_prepare($conn, $query);
+$stmt = $conn->prepare($query);
+$stmt->execute();
+$result = $stmt->get_result();
 
-if (!$stmt) {
-    die("Statement preparation failed: " . mysqli_error($conn));
+echo "<table border='1'>";
+echo "<tr><th>ID</th><th>Name</th><th>Surname</th></tr>";
+
+while ($row = $result->fetch_assoc()) {
+    echo "<tr>";
+    echo "<td>" . $row['id'] . "</td>";
+    echo "<td>" . $row['name'] . "</td>";
+    echo "<td>" . $row['surname'] . "</td>";
+    echo "</tr>";
 }
 
-mysqli_stmt_execute($stmt);
+echo "</table>";
 
-$result = mysqli_stmt_get_result($stmt);
-
-if ($result) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        echo $row['id'] . " - " . $row['name'] . " - " . $row['surname'] . "<br>";
-    }
-} else {
-    echo "Nəticə tapılmadı.";
-}
-
-mysqli_stmt_close($stmt);
-mysqli_close($conn);
+$stmt->close();
+$conn->close();

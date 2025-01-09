@@ -4,28 +4,26 @@ $dbname = "users";
 $username = "root";
 $password = "";
 
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-if (!$conn) {
-    die("Error");
+if ($conn->connect_error) {
+    die("Error: " . $conn->connect_error);
 }
+
+$query = "UPDATE usersinfo SET name = ?, surname = ? WHERE id = ?";
 
 $name = "Adrian";
 $surname = "Harris";
 $id = 2;
 
-$query = "UPDATE usersinfo SET name = ?, surname = ? WHERE id = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("ssi", $name, $surname, $id);
 
-$stmt = mysqli_prepare($conn, $query);
-
-mysqli_stmt_bind_param($stmt, "ssi", $name, $surname, $id);
-$result = mysqli_stmt_execute($stmt);
-
-if ($result) {
+if ($stmt->execute()) {
     echo "data update oldu";
 } else {
     echo "data update olmadı";
 }
 
-mysqli_close($conn);
-mysqli_stmt_close($stmt);
+$stmt->close();
+$conn->close();
