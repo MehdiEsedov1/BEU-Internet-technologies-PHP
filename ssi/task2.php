@@ -13,7 +13,7 @@ $v2 = false; // Boolean tipində dəyişən
 
 // Nümunə:
 const PI = 3.14; // `const` ilə sabit təyini
-define("PI_CASE_INSENSITIVE", 3.14); // `define()` ilə sabit təyini (case-sensitive)
+define("PI_CASE_SENSITIVE", 3.14); // `define()` ilə sabit təyini (case-sensitive)
 
 // Qeyd: `define()` funksiyasında üçüncü parametr olan case-insensitive artıq istifadə tövsiyə edilmir.
 // Əgər üçüncü parametr `true` təyin olunarsa, `PI_CASE_INSENSITIVE` həm böyük, həm də kiçik hərflərlə istifadə edilə bilər.

@@ -10,4 +10,9 @@ while ($num > 0) {
     $num = (int) ($num / 10);
 }
 
-echo $sum == $tmp_num ? "Yes" : "No";
+if ($sum == $a) {
+    echo "Armstongdur";
+} else {
+    echo "Armstong deyil";
+}
+

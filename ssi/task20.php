@@ -1,36 +1,23 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $pp = $_FILES['pp'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['image'])) {
+    $uploadDir = "uploads/";
+    $imageName = basename($_FILES['image']['name']);
+    $uploadFile = $uploadDir . $imageName;
 
-    // İcazə verilən fayl formatları və maksimum ölçü
-    $allowedFileType = ["image/jpeg", "image/jpg", "image/png"]; // İcazə verilən fayl formatları
-    $allowedFileSize = 2 * 1024 * 1024; // Maksimum 2 MB ölçü
+    $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+    $fileType = $_FILES['image']['type'];
 
-    if ($pp['error'] == UPLOAD_ERR_OK) { // Fayl uğurla yüklənibsə
-        // Faylın formatını yoxlayırıq
-        if (!in_array($pp['type'], $allowedFileType)) {
-            die("Fayl növü düzgün deyil!");
+    if (in_array($fileType, $allowedTypes)) {
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile)) {
+            echo "Şəkil uğurla yükləndi: $uploadFile";
+        } else {
+            echo "Şəkil yüklənərkən xəta baş verdi.";
         }
-        // Faylın ölçüsünü yoxlayırıq
-        else if ($allowedFileSize < $pp['size']) {
-            die("Fayl ölçüsü 2 MB-dan böyükdür!");
-        }
-
-        // Yükləmə qovluğu və fayl adının yaradılması
-        $dir = "uploads/"; // Faylın yüklənəcəyi qovluq
-        $file = uniqid() . "-" . basename($pp['name']); // Unikal ad yaradılır
-        $upload_where = $dir . $file; // Tam yol yaradılır
-
-        // Əgər qovluq yoxdursa, yaradılır
-        if (!is_dir($dir)) {
-            mkdir($dir);
-        }
-
-        // Faylın yüklənməsi
-        move_uploaded_file($pp['tmp_name'], $upload_where);
     } else {
-        die("<div class='alert alert-danger'>Fayl yüklənmədi!</div>");
+        echo "Yalnız JPEG, PNG və GIF faylları yüklənə bilər.";
     }
+} else {
+    echo "Şəkil seçilməyib.";
 }
 ?>
 
